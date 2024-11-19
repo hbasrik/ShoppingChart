@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Avenir:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
   --yellow: #e6ca97;
   --rose: #e1a4a9;
@@ -6,60 +9,137 @@
 
 .app-container {
   padding: 20px;
+  overflow: hidden; 
+  font-family: 'Montserrat';
 }
 
 .title {
   text-align: center;
-  font-size: 24px;
-  margin-bottom: 20px;
+  font-size: 45px;
+  margin-bottom: 5rem;
+  font-family: 'Avenir';
+}
+
+.slider-wrapper {
+  overflow-x: auto; 
+  overflow-y: hidden; 
+  display: flex; 
+  gap: 20px;
+  scroll-behavior: smooth; 
+  margin: 0 auto; 
+  width: 94%;
+}
+
+.slider-wrapper::-webkit-scrollbar {
+  height: 1rem ; 
+}
+
+.slider-wrapper::-webkit-scrollbar-track {
+  background-color: var(--white);
+  -webkit-box-shadow: inset 0 0 5px gray;
+  border-radius: 10px;
+}
+
+.slider-wrapper::-webkit-scrollbar-thumb {
+  background-color: var(--white);
+  border-radius: 10px;
+  border: 10px solid #a7a0a0;
+  cursor: pointer;
+}
+
+.slider-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+.prev-button,
+.next-button {
+  background: none;
+  width: 2%;
+  color: black;
+  border: none;
+  cursor: pointer;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.prev-button {
+  left: -1rem; 
+}
+
+.next-button {
+  right: -1rem; 
+}
+
+.prev-button:hover,
+.next-button:hover {
+  box-shadow: 0px 5px 5px var(--white);
 }
 
 .product-card {
-  padding: 10px;
+  flex: 0 0 calc(25% - 20px); 
+  width: calc(25% - 20px);
+  text-align: left; 
+  box-sizing: border-box; 
 }
 
 .product-image {
-  height: 200px;
-  object-fit: contain;
-  margin-bottom: 10px;
+  
+  height: auto;
+  max-height: 200px; 
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border-radius: 1.5rem; 
 }
 
 .product-name {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
-  margin-bottom: 5px;
+  font-family: 'Montserrat';
+  font-weight: 500;
 }
 
 .product-price {
-  font-size: 16px;
+  font-size: 15px;
   color: #333;
-  margin-bottom: 5px;
+  margin-bottom: .5rem;
+  font-family: 'Montserrat';
+  font-weight: 400;
+  margin-bottom: 1.5rem;
 }
 
 .product-rating {
   display: flex;
   align-items: center;
-}
-
-.rating-number {
-  padding-top: .2rem;
+  font-size: 14px;
 }
 
 .product-rating p {
   margin-right: 1rem;
+  margin-bottom: 2rem;
+}
+
+.rating-number {
+  padding-top: .3rem;
 }
 
 .color-buttons {
   display: flex;
   justify-content: left;
-  margin-top: 10px;
+  margin-top: 1rem;
 }
 
 .color-button {
   border: 1px solid gray;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 1.5rem;
+  height: 1.5rem;
   margin: 0 5px;
   cursor: pointer;
 }
@@ -69,11 +149,12 @@
 }
 
 .star-rating {
+  display: flex;
   align-items: center;
 }
 
 .star {
-  font-size: 20px;
+  font-size: 18px;
   color: var(--yellow);
   margin-right: 2px;
 }
@@ -82,3 +163,70 @@
   color: var(--white);
 }
 
+.full-star {
+  color: var(--yellow); 
+}
+
+.half-star {
+  color: var(--yellow); 
+}
+
+.empty-star {
+  color: var(--white); 
+}
+
+.selected-product {
+  margin-top: 1rem;
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #333;
+}
+
+@media (max-width: 1024px) {
+  .product-card {
+    flex: 0 0 calc(33.33% - 20px); 
+  }
+  /* .next-button,
+  .prev-button {
+    display: none;
+  } */
+}
+
+@media (max-width: 768px) {
+  .product-card {
+    flex: 0 0 calc(50% - 20px); 
+  }
+}
+
+@media (max-width: 480px) {
+  .slider-wrapper {
+  display: flex;
+  justify-content: left
+  }
+
+  .product-card {
+    flex: 0 0 calc(100%); 
+  }
+
+  .product-details {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .image-container {
+    text-align: center;
+  }
+  .color-buttons {
+    justify-content: center;
+  }
+  .product-rating {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* .next-button,
+  .prev-button {
+    display: none;
+  } */
+}
