@@ -18,7 +18,7 @@ const App = () => {
   const [minPopularity, setMinPopularity] = useState(0);
   const sliderRef = useRef(null);
 
-  const API_URL="http://localhost:5000/products"
+  const API_URL="https://shopping-chart-api-e6716cfbf41c.herokuapp.com/products"
   useEffect(() => {
     axios.get(API_URL).then((response) => {
       const productsData = response.data;
