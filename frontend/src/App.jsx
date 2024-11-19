@@ -15,6 +15,7 @@ const App = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedColors, setSelectedColors] = useState({});
   const [priceRange, setPriceRange] = useState({ min: "", max: "" });
+  const [minPopularity, setMinPopularity] = useState(0);
   const sliderRef = useRef(null);
 
   useEffect(() => {
@@ -82,13 +83,13 @@ const App = () => {
     );
   };
 
-  const handlePriceFilter = () => {
+  const handleFilter = () => {
     const { min, max } = priceRange;
     const minPrice = parseFloat(min) || 0;
     const maxPrice = parseFloat(max) || Infinity;
 
     const filtered = products.filter(
-      (product) => product.price >= minPrice && product.price <= maxPrice
+      (product) => product.price >= minPrice && product.price <= maxPrice && product.popularityScore / 20 >= minPopularity
     );
     setFilteredProducts(filtered);
   };
@@ -99,10 +100,7 @@ const App = () => {
     <div className="app-container">
       <h1 className="title">Product List</h1>
       <div className="filter-container">
-        
-        
         <div className="filter-inputs">
-          
         <label htmlFor="">Filter Price :  </label>
           <label htmlFor="">
           <input
@@ -124,8 +122,26 @@ const App = () => {
             placeholder="Maximum"
           />
           </label>
+          <label>
+        
+        Minimum Rating:
+        <select
+          className="rating-select"
+          value={minPopularity}
+          onChange={(e) => setMinPopularity(parseFloat(e.target.value))}
+        >
+      
+          <option value={0}>0</option>
+          <option value={1}>1</option>
+          <option value={2}>2</option>
+          <option value={3}>3</option>
+          <option value={4}>4</option>
+          <option value={5}>5</option>
+        </select>
+      </label>
+          
         <label htmlFor="">
-        <button className="filter-button" onClick={handlePriceFilter}>Apply Range</button>
+        <button className="filter-button" onClick={handleFilter}>Apply Filter</button>
         </label>
         </div>
         
@@ -190,3 +206,4 @@ const App = () => {
 };
 
 export default App;
+
