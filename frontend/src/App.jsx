@@ -19,7 +19,7 @@ const App = () => {
   const sliderRef = useRef(null);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/products").then((response) => {
+    axios.get("https://shopping-chart-zbdv.vercel.app/api/products").then((response) => {
       const productsData = response.data;
       setProducts(productsData);
       setFilteredProducts(productsData); // Initialize filtered products
