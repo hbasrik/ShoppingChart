@@ -1,5 +1,5 @@
 const axios = require("axios");
-const products = require("./products.json");
+const products = require("../data/products.json");
 
 const goldPriceAPI = "https://api.metals.dev/v1/metal/spot?api_key=ZXXJN6XEWKBTSQEQHYLF771EQHYLF&metal=gold&currency=USD";
 
