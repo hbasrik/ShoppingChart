@@ -18,11 +18,12 @@ const App = () => {
   const [minPopularity, setMinPopularity] = useState(0);
   const sliderRef = useRef(null);
 
+  const API_URL="http://localhost:5000/products"
   useEffect(() => {
-    axios.get("https://shopping-chart-ox6g-amyloakkr-basris-projects-4189bf9c.vercel.app/api/products").then((response) => {
+    axios.get(API_URL).then((response) => {
       const productsData = response.data;
       setProducts(productsData);
-      setFilteredProducts(productsData); // Initialize filtered products
+      setFilteredProducts(productsData); 
 
       const initialColors = {};
       productsData.forEach((_, index) => {
@@ -34,7 +35,7 @@ const App = () => {
 
   const handleScroll = (direction) => {
     const slider = sliderRef.current;
-    const cardWidth = slider.children[0].offsetWidth + 20; // Card width + gap
+    const cardWidth = slider.children[0].offsetWidth + 20; 
 
     if (direction === "left") {
       slider.scrollBy({ left: -cardWidth, behavior: "smooth" });
