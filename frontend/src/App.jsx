@@ -190,7 +190,7 @@ const App = () => {
                     {renderStars(product.popularityScore / 20)}
                   </p>
                   <p className="rating-number">
-                    {Math.floor((product.popularityScore / 20) * 2) / 2}/5
+                  {(product.popularityScore / 20).toFixed(1)}/5
                   </p>
                 </div>
               </div>
