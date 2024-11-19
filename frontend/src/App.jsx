@@ -12,13 +12,16 @@ import "./style.css";
 
 const App = () => {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedColors, setSelectedColors] = useState({});
+  const [priceRange, setPriceRange] = useState({ min: "", max: "" });
   const sliderRef = useRef(null);
 
   useEffect(() => {
     axios.get("http://localhost:5000/products").then((response) => {
       const productsData = response.data;
       setProducts(productsData);
+      setFilteredProducts(productsData); // Initialize filtered products
 
       const initialColors = {};
       productsData.forEach((_, index) => {
@@ -64,10 +67,7 @@ const App = () => {
             />
           ))}
         {hasHalfStar && (
-          <FontAwesomeIcon
-            icon={halfStar}
-            className="star half-star"
-          />
+          <FontAwesomeIcon icon={halfStar} className="star half-star" />
         )}
         {Array(emptyStars)
           .fill()
@@ -82,25 +82,69 @@ const App = () => {
     );
   };
 
+  const handlePriceFilter = () => {
+    const { min, max } = priceRange;
+    const minPrice = parseFloat(min) || 0;
+    const maxPrice = parseFloat(max) || Infinity;
+
+    const filtered = products.filter(
+      (product) => product.price >= minPrice && product.price <= maxPrice
+    );
+    setFilteredProducts(filtered);
+  };
+
   const colors = ["yellow", "rose", "white"];
 
   return (
     <div className="app-container">
       <h1 className="title">Product List</h1>
+      <div className="filter-container">
+        
+        
+        <div className="filter-inputs">
+          
+        <label htmlFor="">Filter Price :  </label>
+          <label htmlFor="">
+          <input
+            type="number"
+            value={priceRange.min}
+            onChange={(e) =>
+              setPriceRange((prev) => ({ ...prev, min: e.target.value }))
+            }
+            placeholder="Minimum"
+          />
+          </label>
+          <label htmlFor="">
+          <input
+            type="number"
+            value={priceRange.max}
+            onChange={(e) =>
+              setPriceRange((prev) => ({ ...prev, max: e.target.value }))
+            }
+            placeholder="Maximum"
+          />
+          </label>
+        <label htmlFor="">
+        <button className="filter-button" onClick={handlePriceFilter}>Apply Range</button>
+        </label>
+        </div>
+        
+      </div>
+
       <div className="slider-navigation">
         <button className="prev-button" onClick={() => handleScroll("left")}>
           <FontAwesomeIcon icon={faAngleLeft} />
         </button>
 
         <div className="slider-wrapper" ref={sliderRef}>
-          {products.map((product, index) => (
+          {filteredProducts.map((product, index) => (
             <div key={index} className="product-card">
               <div className="image-container">
-              <img
-                src={product.images[selectedColors[index]]}
-                alt={product.name}
-                className="product-image"
-              />
+                <img
+                  src={product.images[selectedColors[index]]}
+                  alt={product.name}
+                  className="product-image"
+                />
               </div>
               <div className="product-details">
                 <h2 className="product-name">{product.name}</h2>
