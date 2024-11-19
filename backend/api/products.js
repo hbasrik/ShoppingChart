@@ -1,10 +1,5 @@
-const express = require("express");
-const cors = require("cors");
 const axios = require("axios");
 const products = require("./products.json");
-
-const app = express();
-app.use(cors());
 
 const goldPriceAPI = "https://api.metals.dev/v1/metal/spot?api_key=ZXXJN6XEWKBTSQEQHYLF771EQHYLF&metal=gold&currency=USD";
 
